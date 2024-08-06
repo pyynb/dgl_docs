@@ -9,11 +9,11 @@
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=0bf289b5" />
 
   
@@ -29,14 +29,13 @@
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=ccdb6887"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="How Does DGL Represent A Graph?" href="2_dglgraph.html" />
-    <link rel="prev" title="A Blitz Introduction to DGL" href="index.html" /> 
+    <link rel="prev" title="A Blitz ntroduction to DGL" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -64,7 +63,7 @@
               <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install and Setup</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Blitz Introduction to DGL</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Blitz ntroduction to DGL</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Node Classification with DGL</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Overview-of-Node-Classification-with-GNN">Overview of Node Classification with GNN</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Loading-Cora-Dataset">Loading Cora Dataset</a></li>
@@ -142,7 +141,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">A Blitz Introduction to DGL</a></li>
+          <li class="breadcrumb-item"><a href="index.html">A Blitz ntroduction to DGL</a></li>
       <li class="breadcrumb-item active">Node Classification with DGL</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/tutorials/blitz/1_introduction.ipynb.txt" rel="nofollow"> View page source</a>
@@ -343,31 +342,45 @@ Edge features
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+In epoch 0, loss: 1.946, val acc: 0.248 (best 0.248), test acc: 0.250 (best 0.250)
+In epoch 5, loss: 1.897, val acc: 0.626 (best 0.648), test acc: 0.653 (best 0.664)
+In epoch 10, loss: 1.825, val acc: 0.678 (best 0.684), test acc: 0.702 (best 0.698)
+In epoch 15, loss: 1.730, val acc: 0.688 (best 0.688), test acc: 0.704 (best 0.704)
+In epoch 20, loss: 1.613, val acc: 0.704 (best 0.704), test acc: 0.717 (best 0.717)
+In epoch 25, loss: 1.475, val acc: 0.712 (best 0.712), test acc: 0.716 (best 0.716)
+In epoch 30, loss: 1.321, val acc: 0.718 (best 0.718), test acc: 0.716 (best 0.716)
+In epoch 35, loss: 1.159, val acc: 0.712 (best 0.720), test acc: 0.714 (best 0.712)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+In epoch 40, loss: 0.996, val acc: 0.722 (best 0.722), test acc: 0.716 (best 0.716)
+In epoch 45, loss: 0.840, val acc: 0.728 (best 0.728), test acc: 0.720 (best 0.719)
+In epoch 50, loss: 0.699, val acc: 0.736 (best 0.736), test acc: 0.727 (best 0.727)
+In epoch 55, loss: 0.575, val acc: 0.748 (best 0.748), test acc: 0.742 (best 0.742)
+In epoch 60, loss: 0.470, val acc: 0.758 (best 0.758), test acc: 0.746 (best 0.746)
+In epoch 65, loss: 0.385, val acc: 0.770 (best 0.770), test acc: 0.748 (best 0.748)
+In epoch 70, loss: 0.316, val acc: 0.770 (best 0.770), test acc: 0.754 (best 0.748)
+In epoch 75, loss: 0.261, val acc: 0.774 (best 0.774), test acc: 0.759 (best 0.754)
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-In epoch 0, loss: 1.946, val acc: 0.092 (best 0.092), test acc: 0.111 (best 0.111)
-In epoch 5, loss: 1.907, val acc: 0.288 (best 0.348), test acc: 0.282 (best 0.359)
-In epoch 10, loss: 1.837, val acc: 0.548 (best 0.548), test acc: 0.544 (best 0.544)
-In epoch 15, loss: 1.745, val acc: 0.664 (best 0.664), test acc: 0.658 (best 0.658)
-In epoch 20, loss: 1.628, val acc: 0.684 (best 0.684), test acc: 0.668 (best 0.668)
-In epoch 25, loss: 1.490, val acc: 0.696 (best 0.696), test acc: 0.700 (best 0.700)
-In epoch 30, loss: 1.335, val acc: 0.702 (best 0.702), test acc: 0.715 (best 0.715)
-In epoch 35, loss: 1.172, val acc: 0.718 (best 0.718), test acc: 0.739 (best 0.739)
-In epoch 40, loss: 1.007, val acc: 0.744 (best 0.744), test acc: 0.742 (best 0.742)
-In epoch 45, loss: 0.849, val acc: 0.756 (best 0.756), test acc: 0.745 (best 0.743)
-In epoch 50, loss: 0.706, val acc: 0.764 (best 0.764), test acc: 0.744 (best 0.744)
-In epoch 55, loss: 0.580, val acc: 0.762 (best 0.764), test acc: 0.750 (best 0.744)
-In epoch 60, loss: 0.473, val acc: 0.770 (best 0.770), test acc: 0.759 (best 0.759)
-In epoch 65, loss: 0.384, val acc: 0.780 (best 0.780), test acc: 0.765 (best 0.761)
-In epoch 70, loss: 0.313, val acc: 0.784 (best 0.784), test acc: 0.770 (best 0.769)
-In epoch 75, loss: 0.256, val acc: 0.784 (best 0.786), test acc: 0.771 (best 0.769)
-In epoch 80, loss: 0.210, val acc: 0.784 (best 0.786), test acc: 0.773 (best 0.769)
-In epoch 85, loss: 0.174, val acc: 0.786 (best 0.786), test acc: 0.775 (best 0.769)
-In epoch 90, loss: 0.146, val acc: 0.786 (best 0.786), test acc: 0.775 (best 0.769)
-In epoch 95, loss: 0.123, val acc: 0.786 (best 0.786), test acc: 0.775 (best 0.769)
+In epoch 80, loss: 0.217, val acc: 0.774 (best 0.774), test acc: 0.760 (best 0.754)
+In epoch 85, loss: 0.182, val acc: 0.772 (best 0.776), test acc: 0.764 (best 0.760)
+In epoch 90, loss: 0.154, val acc: 0.776 (best 0.776), test acc: 0.768 (best 0.760)
+In epoch 95, loss: 0.131, val acc: 0.774 (best 0.776), test acc: 0.768 (best 0.760)
 </pre></div></div>
 </div>
 </section>
@@ -382,13 +395,13 @@ In epoch 95, loss: 0.123, val acc: 0.786 (best 0.786), test acc: 0.775 (best 0.7
 <section id="What’s-next?">
 <h2>What’s next?<a class="headerlink" href="#What’s-next?" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">How</span> <span class="pre">does</span> <span class="pre">DGL</span> <span class="pre">represent</span> <span class="pre">a</span> <span class="pre">graph</span> <span class="pre">&lt;2_dglgraph&gt;</span></code>?</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Write</span> <span class="pre">your</span> <span class="pre">own</span> <span class="pre">GNN</span> <span class="pre">module</span> <span class="pre">&lt;3_message_passing&gt;</span></code>.</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Link</span> <span class="pre">prediction</span> <span class="pre">(predicting</span> <span class="pre">existence</span> <span class="pre">of</span> <span class="pre">edges)</span> <span class="pre">on</span> <span class="pre">full</span>&#160;&#160;&#160; <span class="pre">graph</span> <span class="pre">&lt;4_link_predict&gt;</span></code>.</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Graph</span> <span class="pre">classification</span> <span class="pre">&lt;5_graph_classification&gt;</span></code>.</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Make</span> <span class="pre">your</span> <span class="pre">own</span> <span class="pre">dataset</span> <span class="pre">&lt;6_load_data&gt;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">supported</span> <span class="pre">graph</span> <span class="pre">convolution</span>&#160;&#160;&#160; <span class="pre">modules</span> <span class="pre">&lt;apinn-pytorch&gt;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">datasets</span> <span class="pre">provided</span> <span class="pre">by</span> <span class="pre">DGL</span> <span class="pre">&lt;apidata&gt;</span></code>.</p></li>
+<li><p><a class="reference external" href="2_dglgraph">How does DGL represent a graph?</a></p></li>
+<li><p><a class="reference external" href="3_message_passing">Write your own GNN module.</a></p></li>
+<li><p><a class="reference external" href="4_link_predict">Link prediction (predicting existence of edges) on full graph.</a></p></li>
+<li><p><a class="reference external" href="5_graph_classification">Graph classification.</a></p></li>
+<li><p><a class="reference external" href="6_load_data">Make your own dataset.</a></p></li>
+<li><p><a class="reference external" href="../../api/python/nn-pytorch.html#apinn-pytorch">The list of supported graph convolution modules.</a></p></li>
+<li><p><a class="reference external" href="../../api/python/dgl.data.html#apidata">The list of datasets provided by DGL.</a></p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -406,7 +419,7 @@ In epoch 95, loss: 0.123, val acc: 0.786 (best 0.786), test acc: 0.775 (best 0.7
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="A Blitz Introduction to DGL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="A Blitz ntroduction to DGL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="2_dglgraph.html" class="btn btn-neutral float-right" title="How Does DGL Represent A Graph?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
