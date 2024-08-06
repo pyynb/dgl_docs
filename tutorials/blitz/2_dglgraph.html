@@ -9,11 +9,11 @@
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=0bf289b5" />
 
   
@@ -29,7 +29,6 @@
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=ccdb6887"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -64,7 +63,7 @@
               <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install and Setup</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Blitz Introduction to DGL</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Blitz ntroduction to DGL</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="1_introduction.html">Node Classification with DGL</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How Does DGL Represent A Graph?</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#DGL-Graph-Construction">DGL Graph Construction</a></li>
@@ -142,7 +141,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">A Blitz Introduction to DGL</a></li>
+          <li class="breadcrumb-item"><a href="index.html">A Blitz ntroduction to DGL</a></li>
       <li class="breadcrumb-item active">How Does DGL Represent A Graph?</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/tutorials/blitz/2_dglgraph.ipynb.txt" rel="nofollow"> View page source</a>
@@ -211,7 +210,7 @@
 </div>
 <div class="admonition note">
 <div class="admonition-title fa fa-exclamation-circle"><h4></div><p>Note</p>
-</h4><p><p><code class="docutils literal notranslate"><span class="pre">DGLGraph</span></code>’s are always directed to best fit the computation pattern of graph neural networks, where the messages sent from one node to the other are often different between both directions. If you want to handle undirected graphs, you may consider treating it as a bidirectional graph. See <code class="docutils literal notranslate"><span class="pre">Graph</span>&#160;&#160;&#160; <span class="pre">Transformations</span></code>_ for an example of making a bidirectional graph.</p>
+</h4><p><p><code class="docutils literal notranslate"><span class="pre">DGLGraph</span></code>’s are always directed to best fit the computation pattern of graph neural networks, where the messages sent from one node to the other are often different between both directions. If you want to handle undirected graphs, you may consider treating it as a bidirectional graph. See <code class="docutils literal notranslate"><span class="pre">Graph</span>&#160;&#160;&#160;&#160; <span class="pre">Transformations</span></code>_ for an example of making a bidirectional graph.</p>
 </p></div>
 </section>
 <section id="Assigning-Node-and-Edge-Features-to-Graph">
@@ -238,11 +237,11 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-tensor([[ 0.6683,  0.8230, -0.0686,  0.9238],
-        [-0.5811,  0.2179, -1.0057, -0.1226],
-        [ 1.0936, -1.0360, -0.5488,  0.1470],
-        [-0.7680,  0.3620, -0.5611, -0.0684],
-        [ 0.6617,  1.2957, -1.7664,  1.1931]])
+tensor([[ 0.0536,  0.3337,  0.2365,  0.7976],
+        [-0.3660, -1.0781, -1.0605, -0.2810],
+        [-0.9061,  1.0034,  0.1518,  1.2428],
+        [ 0.7861, -0.5536, -0.6066,  0.7863],
+        [-1.6687,  0.2278,  0.0594, -0.0557]])
 </pre></div></div>
 </div>
 <div class="admonition note">
@@ -346,18 +345,18 @@ tensor([0, 1, 3])
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-tensor([[-0.2413,  0.8199,  1.0199],
-        [ 0.4236, -0.6527,  1.2542],
-        [ 1.7638,  1.4436, -2.0452]])
-tensor([[ 0.6683,  0.8230, -0.0686,  0.9238],
-        [ 1.0936, -1.0360, -0.5488,  0.1470]])
-tensor([[-0.2413,  0.8199,  1.0199],
-        [ 0.4236, -0.6527,  1.2542],
-        [ 0.8534, -1.0359,  0.2758],
-        [ 2.1111,  0.8158, -0.2827]])
-tensor([[ 0.6683,  0.8230, -0.0686,  0.9238],
-        [-0.5811,  0.2179, -1.0057, -0.1226],
-        [-0.7680,  0.3620, -0.5611, -0.0684]])
+tensor([[ 0.7141, -0.2854,  0.0158],
+        [-0.5123,  0.9944,  1.6614],
+        [-0.4116,  0.5583, -0.1480]])
+tensor([[ 0.0536,  0.3337,  0.2365,  0.7976],
+        [-0.9061,  1.0034,  0.1518,  1.2428]])
+tensor([[ 0.7141, -0.2854,  0.0158],
+        [-0.5123,  0.9944,  1.6614],
+        [ 0.1695, -1.3955, -0.0587],
+        [-0.9693,  0.5442,  1.0640]])
+tensor([[ 0.0536,  0.3337,  0.2365,  0.7976],
+        [-0.3660, -1.0781, -1.0605, -0.2810],
+        [ 0.7861, -0.5536, -0.6066,  0.7863]])
 </pre></div></div>
 </div>
 <p>Another common transformation is to add a reverse edge for each edge in the original graph with <code class="docutils literal notranslate"><span class="pre">dgl.add_reverse_edges</span></code>.</p>
@@ -427,9 +426,9 @@ Graph(num_nodes=4, num_edges=3,
 <section id="What’s-next?">
 <h2>What’s next?<a class="headerlink" href="#What’s-next?" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>See <code class="docutils literal notranslate"><span class="pre">here</span> <span class="pre">&lt;apigraph-querying-graph-structure&gt;</span></code> for a list of graph structure query APIs.</p></li>
-<li><p>See <code class="docutils literal notranslate"><span class="pre">here</span> <span class="pre">&lt;api-subgraph-extraction&gt;</span></code> for a list of subgraph extraction routines.</p></li>
-<li><p>See <code class="docutils literal notranslate"><span class="pre">here</span> <span class="pre">&lt;api-transform&gt;</span></code> for a list of graph transformation routines.</p></li>
+<li><p>See <a href="#id1"><span class="problematic" id="id2">:ref:`here &lt;../../api/python/dgl.DGLGraph.html#apigraph-querying-graph-structure&gt;`__</span></a> for a list of graph structure query APIs.</p></li>
+<li><p>See <a href="#id3"><span class="problematic" id="id4">:ref:`here &lt;../../api/python/dgl.html#api-subgraph-extraction&gt;`__</span></a> for a list of subgraph extraction routines.</p></li>
+<li><p>See <a href="#id5"><span class="problematic" id="id6">:ref:`here &lt;../../api/python/dgl.html#api-transform&gt;`__</span></a> for a list of graph transformation routines.</p></li>
 <li><p>API reference of :func:<code class="docutils literal notranslate"><span class="pre">dgl.save_graphs</span></code> and :func:<code class="docutils literal notranslate"><span class="pre">dgl.load_graphs</span></code></p></li>
 </ul>
 <div class="nbinput nblast docutils container">
