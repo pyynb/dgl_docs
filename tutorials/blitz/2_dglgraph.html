@@ -237,11 +237,11 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-tensor([[ 0.0536,  0.3337,  0.2365,  0.7976],
-        [-0.3660, -1.0781, -1.0605, -0.2810],
-        [-0.9061,  1.0034,  0.1518,  1.2428],
-        [ 0.7861, -0.5536, -0.6066,  0.7863],
-        [-1.6687,  0.2278,  0.0594, -0.0557]])
+tensor([[ 0.2560,  0.3011, -1.2493, -1.6353],
+        [-0.0606, -3.2898,  1.5046, -0.5605],
+        [ 0.3353,  1.2092,  0.6212, -1.2932],
+        [-1.0383, -0.0645, -2.7336,  1.5533],
+        [-0.6940, -0.2034, -0.1724, -0.4153]])
 </pre></div></div>
 </div>
 <div class="admonition note">
@@ -345,18 +345,18 @@ tensor([0, 1, 3])
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-tensor([[ 0.7141, -0.2854,  0.0158],
-        [-0.5123,  0.9944,  1.6614],
-        [-0.4116,  0.5583, -0.1480]])
-tensor([[ 0.0536,  0.3337,  0.2365,  0.7976],
-        [-0.9061,  1.0034,  0.1518,  1.2428]])
-tensor([[ 0.7141, -0.2854,  0.0158],
-        [-0.5123,  0.9944,  1.6614],
-        [ 0.1695, -1.3955, -0.0587],
-        [-0.9693,  0.5442,  1.0640]])
-tensor([[ 0.0536,  0.3337,  0.2365,  0.7976],
-        [-0.3660, -1.0781, -1.0605, -0.2810],
-        [ 0.7861, -0.5536, -0.6066,  0.7863]])
+tensor([[-0.1972, -0.4253,  1.1352],
+        [-1.9713,  0.5115, -0.9587],
+        [-0.2107, -1.6961, -0.5456]])
+tensor([[ 0.2560,  0.3011, -1.2493, -1.6353],
+        [ 0.3353,  1.2092,  0.6212, -1.2932]])
+tensor([[-0.1972, -0.4253,  1.1352],
+        [-1.9713,  0.5115, -0.9587],
+        [ 0.2152, -0.8919,  0.1827],
+        [-0.0703, -0.3867,  0.2972]])
+tensor([[ 0.2560,  0.3011, -1.2493, -1.6353],
+        [-0.0606, -3.2898,  1.5046, -0.5605],
+        [-1.0383, -0.0645, -2.7336,  1.5533]])
 </pre></div></div>
 </div>
 <p>Another common transformation is to add a reverse edge for each edge in the original graph with <code class="docutils literal notranslate"><span class="pre">dgl.add_reverse_edges</span></code>.</p>
@@ -426,9 +426,9 @@ Graph(num_nodes=4, num_edges=3,
 <section id="What’s-next?">
 <h2>What’s next?<a class="headerlink" href="#What’s-next?" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>See <a href="#id1"><span class="problematic" id="id2">:ref:`here &lt;../../api/python/dgl.DGLGraph.html#apigraph-querying-graph-structure&gt;`__</span></a> for a list of graph structure query APIs.</p></li>
-<li><p>See <a href="#id3"><span class="problematic" id="id4">:ref:`here &lt;../../api/python/dgl.html#api-subgraph-extraction&gt;`__</span></a> for a list of subgraph extraction routines.</p></li>
-<li><p>See <a href="#id5"><span class="problematic" id="id6">:ref:`here &lt;../../api/python/dgl.html#api-transform&gt;`__</span></a> for a list of graph transformation routines.</p></li>
+<li><p>See <a class="reference external" href="../../api/python/dgl/DGLGraph.html#apigraph-querying-graph-structure">here</a> for a list of graph structure query APIs.</p></li>
+<li><p>See <a class="reference external" href="../../api/python/dgl.html#api-subgraph-extraction">here</a> for a list of subgraph extraction routines.</p></li>
+<li><p>See <a class="reference external" href="../../api/python/dgl.html#api-transform">here</a> for a list of graph transformation routines.</p></li>
 <li><p>API reference of :func:<code class="docutils literal notranslate"><span class="pre">dgl.save_graphs</span></code> and :func:<code class="docutils literal notranslate"><span class="pre">dgl.load_graphs</span></code></p></li>
 </ul>
 <div class="nbinput nblast docutils container">
