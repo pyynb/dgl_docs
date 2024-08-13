@@ -1,51 +1,159 @@
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="../../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Node Classification with DGL &mdash; DGL 2.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=0bf289b5" />
 
-    <title>Node Classification with DGL &#8212; DGL 2.4 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-    <script src="../../_static/documentation_options.js?v=9caaf7ed"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=ccdb6887"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=9caaf7ed"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ccdb6887"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="How Does DGL Represent A Graph?" href="2_dglgraph.html" />
-    <link rel="prev" title="A Blitz Introduction to DGL" href="index.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
+    <link rel="prev" title="A Blitz Introduction to DGL" href="index.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="../../index.html" class="icon icon-home">
+            DGL
+          </a>
+              <div class="version">
+                2.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install and Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Blitz Introduction to DGL</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Node Classification with DGL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Overview-of-Node-Classification-with-GNN">Overview of Node Classification with GNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Loading-Cora-Dataset">Loading Cora Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Defining-a-Graph-Convolutional-Network-(GCN)">Defining a Graph Convolutional Network (GCN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Training-the-GCN">Training the GCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Training-on-GPU">Training on GPU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#What’s-next?">What’s next?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2_dglgraph.html">How Does DGL Represent A Graph?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_message_passing.html">Write your own GNN module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_link_predict.html">Link Prediction using Graph Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_graph_classification.html">Training a GNN for Graph Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6_load_data.html">Make Your Own Dataset</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced Materials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stochastic_training/index.html">🆕 Stochastic Training of GNNs with GraphBolt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guide_cn/index.html">用户指南【包含过时信息】</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guide_ko/index.html">사용자 가이드[시대에 뒤쳐진]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../graphtransformer/index.html">🆕 Tutorial: Graph Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/sparse/index.html">Tutorials: dgl.sparse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpu/index.html">Training on CPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi/index.html">Training on Multiple GPUs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dist/index.html">Distributed training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Paper Study with DGL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.html">dgl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.data.html">dgl.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.dataloading.html">dgl.dataloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.DGLGraph.html">dgl.DGLGraph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.distributed.html">dgl.distributed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.function.html">dgl.function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.geometry.html">dgl.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.graphbolt.html">🆕 dgl.graphbolt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/nn-pytorch.html">dgl.nn (PyTorch)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/nn.functional.html">dgl.nn.functional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.ops.html">dgl.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.optim.html">dgl.optim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.sampling.html">dgl.sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.sparse_v0.html">dgl.sparse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.multiprocessing.html">dgl.multiprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/transforms.html">dgl.transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/python/udf.html">User-defined Functions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contribute to DGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/ffi.html">DGL Foreign Function Interface (FFI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Misc</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../env_var.html">Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DGL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">A Blitz Introduction to DGL</a></li>
+      <li class="breadcrumb-item active">Node Classification with DGL</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/blitz/1_introduction.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="Node-Classification-with-DGL">
-<h1>Node Classification with DGL<a class="headerlink" href="#Node-Classification-with-DGL" title="Link to this heading">¶</a></h1>
+<h1>Node Classification with DGL<a class="headerlink" href="#Node-Classification-with-DGL" title="Link to this heading"></a></h1>
 <p>GNNs are powerful tools for many machine learning tasks on graphs. In this introductory tutorial, you will learn the basic workflow of using GNNs for node classification, i.e. predicting the category of a node in a graph.</p>
 <p>By completing this tutorial, you will be able to</p>
 <ul class="simple">
@@ -61,7 +169,7 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DGLBACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
+<a href="https://docs.python.org/3/library/os.html#os.environ" title="os.environ" class="sphx-glr-backref-module-os sphx-glr-backref-type-py-data"><span class="n">os</span><span class="o">.</span><span class="n">environ</span></a><span class="p">[</span><span class="s2">&quot;DGLBACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
 <span class="kn">import</span> <span class="nn">dgl</span>
 <span class="kn">import</span> <span class="nn">dgl.data</span>
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -71,13 +179,13 @@
 </div>
 </div>
 <section id="Overview-of-Node-Classification-with-GNN">
-<h2>Overview of Node Classification with GNN<a class="headerlink" href="#Overview-of-Node-Classification-with-GNN" title="Link to this heading">¶</a></h2>
+<h2>Overview of Node Classification with GNN<a class="headerlink" href="#Overview-of-Node-Classification-with-GNN" title="Link to this heading"></a></h2>
 <p>One of the most popular and widely adopted tasks on graph data is node classification, where a model needs to predict the ground truth category of each node. Before graph neural networks, many proposed methods are using either connectivity alone (such as DeepWalk or node2vec), or simple combinations of connectivity and the node’s own features. GNNs, by contrast, offers an opportunity to obtain node representations by combining the connectivity and features of a <em>local neighborhood</em>.</p>
 <p><a class="reference external" href="https://arxiv.org/abs/1609.02907">Kipf et al.,</a>_ is an example that formulates the node classification problem as a semi-supervised node classification task. With the help of only a small portion of labeled nodes, a graph neural network (GNN) can accurately predict the node category of the others.</p>
 <p>This tutorial will show how to build such a GNN for semi-supervised node classification with only a small number of labels on the Cora dataset, a citation network with papers as nodes and citations as edges. The task is to predict the category of a given paper. Each paper node contains a word count vector as its features, normalized so that they sum up to one, as described in Section 5.2 of <a class="reference external" href="https://arxiv.org/abs/1609.02907">the paper</a>_.</p>
 </section>
 <section id="Loading-Cora-Dataset">
-<h2>Loading Cora Dataset<a class="headerlink" href="#Loading-Cora-Dataset" title="Link to this heading">¶</a></h2>
+<h2>Loading Cora Dataset<a class="headerlink" href="#Loading-Cora-Dataset" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -150,7 +258,7 @@ Edge features
 </div>
 </section>
 <section id="Defining-a-Graph-Convolutional-Network-(GCN)">
-<h2>Defining a Graph Convolutional Network (GCN)<a class="headerlink" href="#Defining-a-Graph-Convolutional-Network-(GCN)" title="Link to this heading">¶</a></h2>
+<h2>Defining a Graph Convolutional Network (GCN)<a class="headerlink" href="#Defining-a-Graph-Convolutional-Network-(GCN)" title="Link to this heading"></a></h2>
 <p>This tutorial will build a two-layer <a class="reference external" href="http://tkipf.github.io/graph-convolutional-networks/">Graph Convolutional Network (GCN)</a>_. Each layer computes new node representations by aggregating neighbor information.</p>
 <p>To build a multi-layer GCN you can simply stack <code class="docutils literal notranslate"><span class="pre">dgl.nn.GraphConv</span></code> modules, which inherit <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>.</p>
 <div class="nbinput nblast docutils container">
@@ -181,7 +289,7 @@ Edge features
 <p>DGL provides implementation of many popular neighbor aggregation modules. You can easily invoke them with one line of code.</p>
 </section>
 <section id="Training-the-GCN">
-<h2>Training the GCN<a class="headerlink" href="#Training-the-GCN" title="Link to this heading">¶</a></h2>
+<h2>Training the GCN<a class="headerlink" href="#Training-the-GCN" title="Link to this heading"></a></h2>
 <p>Training this GCN is similar to training other PyTorch neural networks.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -239,13 +347,14 @@ Edge features
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-In epoch 0, loss: 1.946, val acc: 0.098 (best 0.098), test acc: 0.068 (best 0.068)
-In epoch 5, loss: 1.902, val acc: 0.370 (best 0.370), test acc: 0.386 (best 0.386)
-In epoch 10, loss: 1.828, val acc: 0.582 (best 0.582), test acc: 0.626 (best 0.626)
-In epoch 15, loss: 1.729, val acc: 0.660 (best 0.660), test acc: 0.671 (best 0.681)
-In epoch 20, loss: 1.607, val acc: 0.678 (best 0.678), test acc: 0.685 (best 0.685)
-In epoch 25, loss: 1.462, val acc: 0.710 (best 0.710), test acc: 0.711 (best 0.711)
-In epoch 30, loss: 1.299, val acc: 0.728 (best 0.728), test acc: 0.729 (best 0.729)
+In epoch 0, loss: 1.946, val acc: 0.168 (best 0.168), test acc: 0.142 (best 0.142)
+In epoch 5, loss: 1.898, val acc: 0.528 (best 0.530), test acc: 0.496 (best 0.504)
+In epoch 10, loss: 1.822, val acc: 0.658 (best 0.658), test acc: 0.625 (best 0.625)
+In epoch 15, loss: 1.722, val acc: 0.672 (best 0.672), test acc: 0.673 (best 0.661)
+In epoch 20, loss: 1.598, val acc: 0.696 (best 0.696), test acc: 0.706 (best 0.706)
+In epoch 25, loss: 1.453, val acc: 0.692 (best 0.696), test acc: 0.709 (best 0.706)
+In epoch 30, loss: 1.292, val acc: 0.706 (best 0.706), test acc: 0.738 (best 0.738)
+In epoch 35, loss: 1.122, val acc: 0.714 (best 0.714), test acc: 0.742 (best 0.742)
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -253,14 +362,14 @@ In epoch 30, loss: 1.299, val acc: 0.728 (best 0.728), test acc: 0.729 (best 0.7
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-In epoch 35, loss: 1.127, val acc: 0.732 (best 0.732), test acc: 0.738 (best 0.730)
-In epoch 40, loss: 0.953, val acc: 0.736 (best 0.736), test acc: 0.748 (best 0.748)
-In epoch 45, loss: 0.789, val acc: 0.746 (best 0.748), test acc: 0.753 (best 0.753)
-In epoch 50, loss: 0.642, val acc: 0.764 (best 0.764), test acc: 0.759 (best 0.759)
-In epoch 55, loss: 0.516, val acc: 0.764 (best 0.766), test acc: 0.768 (best 0.760)
-In epoch 60, loss: 0.412, val acc: 0.766 (best 0.766), test acc: 0.778 (best 0.760)
-In epoch 65, loss: 0.329, val acc: 0.770 (best 0.770), test acc: 0.784 (best 0.784)
-In epoch 70, loss: 0.264, val acc: 0.770 (best 0.772), test acc: 0.787 (best 0.786)
+In epoch 40, loss: 0.953, val acc: 0.712 (best 0.714), test acc: 0.751 (best 0.742)
+In epoch 45, loss: 0.793, val acc: 0.716 (best 0.716), test acc: 0.757 (best 0.757)
+In epoch 50, loss: 0.649, val acc: 0.738 (best 0.738), test acc: 0.765 (best 0.764)
+In epoch 55, loss: 0.525, val acc: 0.752 (best 0.752), test acc: 0.768 (best 0.768)
+In epoch 60, loss: 0.423, val acc: 0.752 (best 0.752), test acc: 0.773 (best 0.768)
+In epoch 65, loss: 0.341, val acc: 0.762 (best 0.762), test acc: 0.771 (best 0.771)
+In epoch 70, loss: 0.276, val acc: 0.760 (best 0.764), test acc: 0.775 (best 0.772)
+In epoch 75, loss: 0.225, val acc: 0.758 (best 0.764), test acc: 0.774 (best 0.772)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -268,16 +377,15 @@ In epoch 70, loss: 0.264, val acc: 0.770 (best 0.772), test acc: 0.787 (best 0.7
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-In epoch 75, loss: 0.214, val acc: 0.770 (best 0.772), test acc: 0.790 (best 0.786)
-In epoch 80, loss: 0.175, val acc: 0.772 (best 0.772), test acc: 0.791 (best 0.786)
-In epoch 85, loss: 0.144, val acc: 0.772 (best 0.772), test acc: 0.789 (best 0.786)
-In epoch 90, loss: 0.121, val acc: 0.776 (best 0.776), test acc: 0.786 (best 0.786)
-In epoch 95, loss: 0.102, val acc: 0.778 (best 0.778), test acc: 0.783 (best 0.785)
+In epoch 80, loss: 0.186, val acc: 0.762 (best 0.764), test acc: 0.774 (best 0.772)
+In epoch 85, loss: 0.155, val acc: 0.762 (best 0.764), test acc: 0.772 (best 0.772)
+In epoch 90, loss: 0.130, val acc: 0.756 (best 0.764), test acc: 0.771 (best 0.772)
+In epoch 95, loss: 0.111, val acc: 0.758 (best 0.764), test acc: 0.772 (best 0.772)
 </pre></div></div>
 </div>
 </section>
 <section id="Training-on-GPU">
-<h2>Training on GPU<a class="headerlink" href="#Training-on-GPU" title="Link to this heading">¶</a></h2>
+<h2>Training on GPU<a class="headerlink" href="#Training-on-GPU" title="Link to this heading"></a></h2>
 <p>Training on GPU requires to put both the model and the graph onto GPU with the <code class="docutils literal notranslate"><span class="pre">to</span></code> method, similar to what you will do in PyTorch.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
@@ -285,7 +393,7 @@ In epoch 95, loss: 0.102, val acc: 0.778 (best 0.778), test acc: 0.783 (best 0.7
 <p>g = g.to(‘cuda’) model = GCN(g.ndata[‘feat’].shape[1], 16, dataset.num_classes).to(‘cuda’) train(g, model)</p>
 </section>
 <section id="What’s-next?">
-<h2>What’s next?<a class="headerlink" href="#What’s-next?" title="Link to this heading">¶</a></h2>
+<h2>What’s next?<a class="headerlink" href="#What’s-next?" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>:doc:<code class="docutils literal notranslate"><span class="pre">How</span> <span class="pre">does</span> <span class="pre">DGL</span> <span class="pre">represent</span> <span class="pre">a</span> <span class="pre">graph</span> <span class="pre">&lt;2_dglgraph&gt;</span></code>?</p></li>
 <li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Write</span> <span class="pre">your</span> <span class="pre">own</span> <span class="pre">GNN</span> <span class="pre">module</span> <span class="pre">&lt;3_message_passing&gt;</span></code>.</p></li>
@@ -308,120 +416,34 @@ In epoch 95, loss: 0.102, val acc: 0.778 (best 0.778), test acc: 0.783 (best 0.7
 </section>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="A Blitz Introduction to DGL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2_dglgraph.html" class="btn btn-neutral float-right" title="How Does DGL Represent A Graph?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, DGL Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">DGL</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install and Setup</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Blitz Introduction to DGL</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Advanced Materials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../stochastic_training/index.html">🆕 Stochastic Training of GNNs with GraphBolt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../guide/index.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../guide_cn/index.html">用户指南【包含过时信息】</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../guide_ko/index.html">사용자 가이드[시대에 뒤쳐진]</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../graphtransformer/index.html">🆕 Tutorial: Graph Transformer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/sparse/index.html">Tutorials: dgl.sparse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cpu/index.html">Training on CPUs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi/index.html">Training on Multiple GPUs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dist/index.html">Distributed training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models/index.html">Paper Study with DGL</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.html">dgl</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.data.html">dgl.data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.dataloading.html">dgl.dataloading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.DGLGraph.html">dgl.DGLGraph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.distributed.html">dgl.distributed</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.function.html">dgl.function</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.geometry.html">dgl.geometry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.graphbolt.html">🆕 dgl.graphbolt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/nn-pytorch.html">dgl.nn (PyTorch)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/nn.functional.html">dgl.nn.functional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.ops.html">dgl.ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.optim.html">dgl.optim</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.sampling.html">dgl.sampling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.sparse_v0.html">dgl.sparse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/dgl.multiprocessing.html">dgl.multiprocessing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/transforms.html">dgl.transforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/python/udf.html">User-defined Functions</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Notes</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contribute to DGL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../developer/ffi.html">DGL Foreign Function Interface (FFI)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance Benchmarks</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Misc</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions (FAQ)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../env_var.html">Environment Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">A Blitz Introduction to DGL</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">A Blitz Introduction to DGL</a></li>
-      <li>Next: <a href="2_dglgraph.html" title="next chapter">How Does DGL Represent A Graph?</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2018, DGL Team.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-      |
-      <a href="../../_sources/tutorials/blitz/1_introduction.ipynb.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
