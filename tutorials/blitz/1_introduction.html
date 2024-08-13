@@ -13,7 +13,6 @@
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
       <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=0bf289b5" />
 
   
@@ -29,8 +28,6 @@
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=ccdb6887"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -65,12 +62,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Install and Setup</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">A Blitz Introduction to DGL</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Node Classification with DGL</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Overview-of-Node-Classification-with-GNN">Overview of Node Classification with GNN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Loading-Cora-Dataset">Loading Cora Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Defining-a-Graph-Convolutional-Network-(GCN)">Defining a Graph Convolutional Network (GCN)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Training-the-GCN">Training the GCN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Training-on-GPU">Training on GPU</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#What’s-next?">What’s next?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overview-of-node-classification-with-gnn">Overview of Node Classification with GNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-cora-dataset">Loading Cora Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-graph-convolutional-network-gcn">Defining a Graph Convolutional Network (GCN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training-the-gcn">Training the GCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training-on-gpu">Training on GPU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#whats-next">What’s next?</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="2_dglgraph.html">How Does DGL Represent A Graph?</a></li>
@@ -144,7 +141,7 @@
           <li class="breadcrumb-item"><a href="index.html">A Blitz Introduction to DGL</a></li>
       <li class="breadcrumb-item active">Node Classification with DGL</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/tutorials/blitz/1_introduction.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/tutorials/blitz/1_introduction.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -152,22 +149,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="Node-Classification-with-DGL">
-<h1>Node Classification with DGL<a class="headerlink" href="#Node-Classification-with-DGL" title="Link to this heading"></a></h1>
-<p>GNNs are powerful tools for many machine learning tasks on graphs. In this introductory tutorial, you will learn the basic workflow of using GNNs for node classification, i.e. predicting the category of a node in a graph.</p>
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-tutorials-blitz-1-introduction-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="node-classification-with-dgl">
+<span id="sphx-glr-tutorials-blitz-1-introduction-py"></span><h1>Node Classification with DGL<a class="headerlink" href="#node-classification-with-dgl" title="Link to this heading"></a></h1>
+<p>GNNs are powerful tools for many machine learning tasks on graphs. In
+this introductory tutorial, you will learn the basic workflow of using
+GNNs for node classification, i.e. predicting the category of a node in
+a graph.</p>
 <p>By completing this tutorial, you will be able to</p>
 <ul class="simple">
 <li><p>Load a DGL-provided dataset.</p></li>
 <li><p>Build a GNN model with DGL-provided neural network modules.</p></li>
-<li><p>Train and evaluate a GNN model for node classification on either CPU or GPU.</p></li>
+<li><p>Train and evaluate a GNN model for node classification on either CPU
+or GPU.</p></li>
 </ul>
-<p>This tutorial assumes that you have experience in building neural networks with PyTorch.</p>
+<p>This tutorial assumes that you have experience in building neural
+networks with PyTorch.</p>
 <p>(Time estimate: 13 minutes)</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
 <a href="https://docs.python.org/3/library/os.html#os.environ" title="os.environ" class="sphx-glr-backref-module-os sphx-glr-backref-type-py-data"><span class="n">os</span><span class="o">.</span><span class="n">environ</span></a><span class="p">[</span><span class="s2">&quot;DGLBACKEND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
 <span class="kn">import</span> <span class="nn">dgl</span>
@@ -177,30 +180,37 @@
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 </pre></div>
 </div>
-</div>
-<section id="Overview-of-Node-Classification-with-GNN">
-<h2>Overview of Node Classification with GNN<a class="headerlink" href="#Overview-of-Node-Classification-with-GNN" title="Link to this heading"></a></h2>
-<p>One of the most popular and widely adopted tasks on graph data is node classification, where a model needs to predict the ground truth category of each node. Before graph neural networks, many proposed methods are using either connectivity alone (such as DeepWalk or node2vec), or simple combinations of connectivity and the node’s own features. GNNs, by contrast, offers an opportunity to obtain node representations by combining the connectivity and features of a <em>local neighborhood</em>.</p>
-<p><a class="reference external" href="https://arxiv.org/abs/1609.02907">Kipf et al.,</a>_ is an example that formulates the node classification problem as a semi-supervised node classification task. With the help of only a small portion of labeled nodes, a graph neural network (GNN) can accurately predict the node category of the others.</p>
-<p>This tutorial will show how to build such a GNN for semi-supervised node classification with only a small number of labels on the Cora dataset, a citation network with papers as nodes and citations as edges. The task is to predict the category of a given paper. Each paper node contains a word count vector as its features, normalized so that they sum up to one, as described in Section 5.2 of <a class="reference external" href="https://arxiv.org/abs/1609.02907">the paper</a>_.</p>
+<section id="overview-of-node-classification-with-gnn">
+<h2>Overview of Node Classification with GNN<a class="headerlink" href="#overview-of-node-classification-with-gnn" title="Link to this heading"></a></h2>
+<p>One of the most popular and widely adopted tasks on graph data is node
+classification, where a model needs to predict the ground truth category
+of each node. Before graph neural networks, many proposed methods are
+using either connectivity alone (such as DeepWalk or node2vec), or simple
+combinations of connectivity and the node’s own features.  GNNs, by
+contrast, offers an opportunity to obtain node representations by
+combining the connectivity and features of a <em>local neighborhood</em>.</p>
+<p><a class="reference external" href="https://arxiv.org/abs/1609.02907">Kipf et
+al.,</a> is an example that formulates
+the node classification problem as a semi-supervised node classification
+task. With the help of only a small portion of labeled nodes, a graph
+neural network (GNN) can accurately predict the node category of the
+others.</p>
+<p>This tutorial will show how to build such a GNN for semi-supervised node
+classification with only a small number of labels on the Cora
+dataset,
+a citation network with papers as nodes and citations as edges. The task
+is to predict the category of a given paper. Each paper node contains a
+word count vector as its features, normalized so that they sum up to one,
+as described in Section 5.2 of
+<a class="reference external" href="https://arxiv.org/abs/1609.02907">the paper</a>.</p>
 </section>
-<section id="Loading-Cora-Dataset">
-<h2>Loading Cora Dataset<a class="headerlink" href="#Loading-Cora-Dataset" title="Link to this heading"></a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dgl</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">CoraGraphDataset</span><span class="p">()</span>
+<section id="loading-cora-dataset">
+<h2>Loading Cora Dataset<a class="headerlink" href="#loading-cora-dataset" title="Link to this heading"></a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dgl</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">CoraGraphDataset</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of categories: </span><span class="si">{</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-  NumNodes: 2708
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>  NumNodes: 2708
   NumEdges: 10556
   NumFeats: 1433
   NumClasses: 7
@@ -209,42 +219,33 @@
   NumTestSamples: 1000
 Done loading data from cached files.
 Number of categories: 7
-</pre></div></div>
-</div>
-<p>A DGL Dataset object may contain one or multiple graphs. The Cora dataset used in this tutorial only consists of one single graph.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<p>A DGL Dataset object may contain one or multiple graphs. The Cora
+dataset used in this tutorial only consists of one single graph.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<p>A DGL graph can store node features and edge features in two dictionary-like attributes called <code class="docutils literal notranslate"><span class="pre">ndata</span></code> and <code class="docutils literal notranslate"><span class="pre">edata</span></code>. In the DGL Cora dataset, the graph contains the following node features:</p>
+<p>A DGL graph can store node features and edge features in two
+dictionary-like attributes called <code class="docutils literal notranslate"><span class="pre">ndata</span></code> and <code class="docutils literal notranslate"><span class="pre">edata</span></code>.
+In the DGL Cora dataset, the graph contains the following node features:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">train_mask</span></code>: A boolean tensor indicating whether the node is in the training set.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">val_mask</span></code>: A boolean tensor indicating whether the node is in the validation set.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">test_mask</span></code>: A boolean tensor indicating whether the node is in the test set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train_mask</span></code>: A boolean tensor indicating whether the node is in the
+training set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">val_mask</span></code>: A boolean tensor indicating whether the node is in the
+validation set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_mask</span></code>: A boolean tensor indicating whether the node is in the
+test set.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: The ground truth node category.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feat</span></code>: The node features.</p></li>
 </ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node features&quot;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node features&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edge features&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edata</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Node features
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Node features
 {&#39;feat&#39;: tensor([[0., 0., 0.,  ..., 0., 0., 0.],
         [0., 0., 0.,  ..., 0., 0., 0.],
         [0., 0., 0.,  ..., 0., 0., 0.],
@@ -254,18 +255,18 @@ Node features
         [0., 0., 0.,  ..., 0., 0., 0.]]), &#39;label&#39;: tensor([3, 4, 4,  ..., 3, 3, 3]), &#39;test_mask&#39;: tensor([False, False, False,  ...,  True,  True,  True]), &#39;val_mask&#39;: tensor([False, False, False,  ..., False, False, False]), &#39;train_mask&#39;: tensor([ True,  True,  True,  ..., False, False, False])}
 Edge features
 {}
-</pre></div></div>
-</div>
-</section>
-<section id="Defining-a-Graph-Convolutional-Network-(GCN)">
-<h2>Defining a Graph Convolutional Network (GCN)<a class="headerlink" href="#Defining-a-Graph-Convolutional-Network-(GCN)" title="Link to this heading"></a></h2>
-<p>This tutorial will build a two-layer <a class="reference external" href="http://tkipf.github.io/graph-convolutional-networks/">Graph Convolutional Network (GCN)</a>_. Each layer computes new node representations by aggregating neighbor information.</p>
-<p>To build a multi-layer GCN you can simply stack <code class="docutils literal notranslate"><span class="pre">dgl.nn.GraphConv</span></code> modules, which inherit <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgl.nn</span> <span class="kn">import</span> <span class="n">GraphConv</span>
+</section>
+<section id="defining-a-graph-convolutional-network-gcn">
+<h2>Defining a Graph Convolutional Network (GCN)<a class="headerlink" href="#defining-a-graph-convolutional-network-gcn" title="Link to this heading"></a></h2>
+<p>This tutorial will build a two-layer <a class="reference external" href="http://tkipf.github.io/graph-convolutional-networks/">Graph Convolutional Network
+(GCN)</a>. Each
+layer computes new node representations by aggregating neighbor
+information.</p>
+<p>To build a multi-layer GCN you can simply stack <code class="docutils literal notranslate"><span class="pre">dgl.nn.GraphConv</span></code>
+modules, which inherit <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dgl.nn</span> <span class="kn">import</span> <span class="n">GraphConv</span>
 
 
 <span class="k">class</span> <span class="nc">GCN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -285,17 +286,13 @@ Edge features
 <span class="n">model</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s2">&quot;feat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<p>DGL provides implementation of many popular neighbor aggregation modules. You can easily invoke them with one line of code.</p>
+<p>DGL provides implementation of many popular neighbor aggregation
+modules. You can easily invoke them with one line of code.</p>
 </section>
-<section id="Training-the-GCN">
-<h2>Training the GCN<a class="headerlink" href="#Training-the-GCN" title="Link to this heading"></a></h2>
+<section id="training-the-gcn">
+<h2>Training the GCN<a class="headerlink" href="#training-the-gcn" title="Link to this heading"></a></h2>
 <p>Training this GCN is similar to training other PyTorch neural networks.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
     <span class="n">best_val_acc</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">best_test_acc</span> <span class="o">=</span> <span class="mi">0</span>
@@ -341,77 +338,66 @@ Edge features
 <span class="n">train</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-In epoch 0, loss: 1.946, val acc: 0.168 (best 0.168), test acc: 0.142 (best 0.142)
-In epoch 5, loss: 1.898, val acc: 0.528 (best 0.530), test acc: 0.496 (best 0.504)
-In epoch 10, loss: 1.822, val acc: 0.658 (best 0.658), test acc: 0.625 (best 0.625)
-In epoch 15, loss: 1.722, val acc: 0.672 (best 0.672), test acc: 0.673 (best 0.661)
-In epoch 20, loss: 1.598, val acc: 0.696 (best 0.696), test acc: 0.706 (best 0.706)
-In epoch 25, loss: 1.453, val acc: 0.692 (best 0.696), test acc: 0.709 (best 0.706)
-In epoch 30, loss: 1.292, val acc: 0.706 (best 0.706), test acc: 0.738 (best 0.738)
-In epoch 35, loss: 1.122, val acc: 0.714 (best 0.714), test acc: 0.742 (best 0.742)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-In epoch 40, loss: 0.953, val acc: 0.712 (best 0.714), test acc: 0.751 (best 0.742)
-In epoch 45, loss: 0.793, val acc: 0.716 (best 0.716), test acc: 0.757 (best 0.757)
-In epoch 50, loss: 0.649, val acc: 0.738 (best 0.738), test acc: 0.765 (best 0.764)
-In epoch 55, loss: 0.525, val acc: 0.752 (best 0.752), test acc: 0.768 (best 0.768)
-In epoch 60, loss: 0.423, val acc: 0.752 (best 0.752), test acc: 0.773 (best 0.768)
-In epoch 65, loss: 0.341, val acc: 0.762 (best 0.762), test acc: 0.771 (best 0.771)
-In epoch 70, loss: 0.276, val acc: 0.760 (best 0.764), test acc: 0.775 (best 0.772)
-In epoch 75, loss: 0.225, val acc: 0.758 (best 0.764), test acc: 0.774 (best 0.772)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-In epoch 80, loss: 0.186, val acc: 0.762 (best 0.764), test acc: 0.774 (best 0.772)
-In epoch 85, loss: 0.155, val acc: 0.762 (best 0.764), test acc: 0.772 (best 0.772)
-In epoch 90, loss: 0.130, val acc: 0.756 (best 0.764), test acc: 0.771 (best 0.772)
-In epoch 95, loss: 0.111, val acc: 0.758 (best 0.764), test acc: 0.772 (best 0.772)
-</pre></div></div>
-</div>
-</section>
-<section id="Training-on-GPU">
-<h2>Training on GPU<a class="headerlink" href="#Training-on-GPU" title="Link to this heading"></a></h2>
-<p>Training on GPU requires to put both the model and the graph onto GPU with the <code class="docutils literal notranslate"><span class="pre">to</span></code> method, similar to what you will do in PyTorch.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>In epoch 0, loss: 1.946, val acc: 0.092 (best 0.092), test acc: 0.118 (best 0.118)
+In epoch 5, loss: 1.893, val acc: 0.452 (best 0.452), test acc: 0.495 (best 0.495)
+In epoch 10, loss: 1.819, val acc: 0.490 (best 0.490), test acc: 0.495 (best 0.495)
+In epoch 15, loss: 1.719, val acc: 0.510 (best 0.510), test acc: 0.539 (best 0.539)
+In epoch 20, loss: 1.595, val acc: 0.606 (best 0.606), test acc: 0.648 (best 0.648)
+In epoch 25, loss: 1.450, val acc: 0.666 (best 0.666), test acc: 0.693 (best 0.693)
+In epoch 30, loss: 1.287, val acc: 0.694 (best 0.694), test acc: 0.717 (best 0.717)
+In epoch 35, loss: 1.115, val acc: 0.706 (best 0.706), test acc: 0.728 (best 0.726)
+In epoch 40, loss: 0.942, val acc: 0.720 (best 0.720), test acc: 0.738 (best 0.738)
+In epoch 45, loss: 0.779, val acc: 0.738 (best 0.738), test acc: 0.749 (best 0.749)
+In epoch 50, loss: 0.633, val acc: 0.742 (best 0.742), test acc: 0.755 (best 0.754)
+In epoch 55, loss: 0.508, val acc: 0.744 (best 0.746), test acc: 0.754 (best 0.756)
+In epoch 60, loss: 0.407, val acc: 0.744 (best 0.746), test acc: 0.759 (best 0.756)
+In epoch 65, loss: 0.325, val acc: 0.748 (best 0.750), test acc: 0.762 (best 0.763)
+In epoch 70, loss: 0.262, val acc: 0.748 (best 0.750), test acc: 0.765 (best 0.763)
+In epoch 75, loss: 0.213, val acc: 0.750 (best 0.750), test acc: 0.771 (best 0.763)
+In epoch 80, loss: 0.174, val acc: 0.756 (best 0.756), test acc: 0.769 (best 0.769)
+In epoch 85, loss: 0.144, val acc: 0.758 (best 0.758), test acc: 0.772 (best 0.772)
+In epoch 90, loss: 0.121, val acc: 0.760 (best 0.762), test acc: 0.774 (best 0.774)
+In epoch 95, loss: 0.103, val acc: 0.760 (best 0.762), test acc: 0.775 (best 0.774)
 </pre></div>
 </div>
-<p>g = g.to(‘cuda’) model = GCN(g.ndata[‘feat’].shape[1], 16, dataset.num_classes).to(‘cuda’) train(g, model)</p>
 </section>
-<section id="What’s-next?">
-<h2>What’s next?<a class="headerlink" href="#What’s-next?" title="Link to this heading"></a></h2>
+<section id="training-on-gpu">
+<h2>Training on GPU<a class="headerlink" href="#training-on-gpu" title="Link to this heading"></a></h2>
+<p>Training on GPU requires to put both the model and the graph onto GPU
+with the <code class="docutils literal notranslate"><span class="pre">to</span></code> method, similar to what you will do in PyTorch.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;feat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+<span class="n">train</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="whats-next">
+<h2>What’s next?<a class="headerlink" href="#whats-next" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">How</span> <span class="pre">does</span> <span class="pre">DGL</span> <span class="pre">represent</span> <span class="pre">a</span> <span class="pre">graph</span> <span class="pre">&lt;2_dglgraph&gt;</span></code>?</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Write</span> <span class="pre">your</span> <span class="pre">own</span> <span class="pre">GNN</span> <span class="pre">module</span> <span class="pre">&lt;3_message_passing&gt;</span></code>.</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Link</span> <span class="pre">prediction</span> <span class="pre">(predicting</span> <span class="pre">existence</span> <span class="pre">of</span> <span class="pre">edges)</span> <span class="pre">on</span> <span class="pre">full</span>&#160;&#160;&#160; <span class="pre">graph</span> <span class="pre">&lt;4_link_predict&gt;</span></code>.</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Graph</span> <span class="pre">classification</span> <span class="pre">&lt;5_graph_classification&gt;</span></code>.</p></li>
-<li><p>:doc:<code class="docutils literal notranslate"><span class="pre">Make</span> <span class="pre">your</span> <span class="pre">own</span> <span class="pre">dataset</span> <span class="pre">&lt;6_load_data&gt;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">supported</span> <span class="pre">graph</span> <span class="pre">convolution</span>&#160;&#160;&#160; <span class="pre">modules</span> <span class="pre">&lt;apinn-pytorch&gt;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">datasets</span> <span class="pre">provided</span> <span class="pre">by</span> <span class="pre">DGL</span> <span class="pre">&lt;apidata&gt;</span></code>.</p></li>
+<li><p><a class="reference internal" href="2_dglgraph.html"><span class="doc">How does DGL represent a graph</span></a>?</p></li>
+<li><p><a class="reference internal" href="3_message_passing.html"><span class="doc">Write your own GNN module</span></a>.</p></li>
+<li><p><a class="reference internal" href="4_link_predict.html"><span class="doc">Link prediction (predicting existence of edges) on full
+graph</span></a>.</p></li>
+<li><p><a class="reference internal" href="5_graph_classification.html"><span class="doc">Graph classification</span></a>.</p></li>
+<li><p><a class="reference internal" href="6_load_data.html"><span class="doc">Make your own dataset</span></a>.</p></li>
+<li><p><a class="reference internal" href="../../api/python/nn-pytorch.html#apinn-pytorch"><span class="std std-ref">The list of supported graph convolution
+modules</span></a>.</p></li>
+<li><p><a class="reference internal" href="../../api/python/dgl.data.html#apidata"><span class="std std-ref">The list of datasets provided by DGL</span></a>.</p></li>
 </ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Thumbnail credits: Stanford CS224W Notes</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Thumbnail credits: Stanford CS224W Notes</span>
 <span class="c1"># sphinx_gallery_thumbnail_path = &#39;_static/blitz_1_introduction.png&#39;</span>
 </pre></div>
 </div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.275 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-blitz-1-introduction-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/015cd44e6d8478faac5ba1cadd11df7a/1_introduction.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">1_introduction.ipynb</span></code></a></p>
 </div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/9fb870a572a51bb3bbc8955ea8058be1/1_introduction.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">1_introduction.py</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
 </section>
 </section>
 
